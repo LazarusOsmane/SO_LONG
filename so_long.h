@@ -65,10 +65,12 @@ typedef struct s_data
 
 typedef struct s_map
 {
-	int		width;
-	int		heigth;
+	int		w;
+	int		h;
 	int		s_width;
 	int		s_heigth;
+    int     m_width;
+    int     m_heigth;
 	char	**map;
 }	t_map;
 
