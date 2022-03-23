@@ -13,7 +13,6 @@
 
 int main(int ac, char **av)
 {
-    int     i;
     t_all   *all;
 
     all = init_struct();
@@ -23,9 +22,9 @@ int main(int ac, char **av)
     all->mlx = mlx_init();
     all->img = mlx_new_window(all->mlx, all->map->w * 64, all->map->h * 64, "");
     all->win = mlx_new_image(all->mlx, all->map->w * 64, all->map->h * 64);
-    i = -1;
-    while(all->map->map[++i])
-        printf("%s||\n", all->map->map[i]);
+    mlx_loop(all->mlx);
+    mlx_destroy_image(all->mlx, all->img);
+    mlx_destroy_window(all->mlx, all->win);
     delete_struct(all);
     return (0);
 }

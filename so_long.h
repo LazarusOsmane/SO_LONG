@@ -76,6 +76,8 @@ typedef struct s_map
 
 typedef struct s_all
 {
+    int             w;
+    int             y;
 	void			*mlx;
 	void			*win;
 	t_data			*img;
@@ -83,6 +85,7 @@ typedef struct s_all
 	t_map			*map;
     t_xpm           *xpm;
     t_elem          *elem;
+    char            **maps;
     t_player        *player;
 }	t_all;
 
