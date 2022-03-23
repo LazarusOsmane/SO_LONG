@@ -13,13 +13,16 @@
 
 int main(int ac, char **av)
 {
-    int i;
-    char **map;
+    int     i;
+    t_all   *all;
 
+    all = init_struct();
+    all->map->map = init_map(all, av[ac - 1], NULL, NULL);
+    if (!all->map->map)
+        delete_struct(all);
     i = -1;
-    map = init_map(av[ac - 1], NULL, NULL, NULL);
-    while (map && map[++i])
-        printf("%s\n", map[i]);
-    ft_free_tabs((void **)map);
+    while(all->map->map[++i])
+        printf("%s||\n", all->map->map[i]);
+    delete_struct(all);
     return (0);
 }

@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC = main.c parse.c
+SRC = main.c parse.c memoire.c
 OBJ = ${SRC:%.c=%.o}
 CFLAG = -g3 -Wall -Wextra -Werror
 UNAME := $(shell uname)
@@ -25,6 +25,17 @@ so_long: $(OBJ)
 		cd libft/ && make && cd ..
 		cd minilibx-linux && make && cd ../
 		gcc $(CFLAG) -c $^ -o $@
+endif
+
+ifeq ($(UNAME), Darwin)
+so_long: $(OBJ)
+	#$(CC) $(CFLAG) $(OBJ) minilibx_opengl_20191021/libmlx.a -lreadline -o $@  -lmlx -framework OpenGL -framework AppKit  -I./minilibx_opengl_20191021/ 
+	$(CC) $(CFLAG) $(OBJ) libft/libft.a minilibx_opengl_20191021/libmlx.a  -o $@ -framework OpenGL -framework AppKit  -I./minilibx_opengl_20191021/ 
+
+%.o: %.c
+	cd libft/ && make && cd ..
+	cd minilibx_opengl_20191021/ && make && cd ../
+	$(CC) $(CFLAG) -c $< -o $@
 endif
 
 clean: 

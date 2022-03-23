@@ -83,11 +83,12 @@ char **check_map(char **maps, int len, int nbrl)
     return (maps);
 }
 
-char **init_map(char *file, char *map, char **maps, char *line)
+char **init_map(t_all *all, char *file, char **maps, char *map)
 {
     int     i;
     int     fd;
     int     len;
+    char    *line;
 
     i = 0;
     len = 0;
@@ -103,5 +104,7 @@ char **init_map(char *file, char *map, char **maps, char *line)
         ft_free_exit(map, "Error\nthe map should not be less than 3 lines long ");
     maps = ft_split(map, '\n');
     ft_free_null(map);
+    all->map->heigth = i - 1;
+    all->map->width = len - 2;
     return (check_map(maps, len - 2, i - 1));
 }
