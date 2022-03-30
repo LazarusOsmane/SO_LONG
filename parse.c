@@ -6,7 +6,7 @@
 /*   By: lazarus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 22:06:59 by lazarus           #+#    #+#             */
-/*   Updated: 2022/03/22 19:15:33 by lazarus          ###   ########.fr       */
+/*   Updated: 2022/03/30 01:48:12 by engooh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -31,7 +31,7 @@ int open_file(char *file)
     return (fd);
 }
 
-char    *get_next_line(int fd, int *size, char *map)
+char    *get_next_line(t_all *all, int fd, int *size, char *map)
 {
     int  ret;
     int  len;
@@ -55,31 +55,34 @@ char    *get_next_line(int fd, int *size, char *map)
     if (ret < 0 || (len != *size && ret))
     {
         ft_free_null(map);
-        ft_free_exit(line, "Error\nthe map does not respect the .ber format");
+        ft_free_exit(all, line, "Error\nthe map does not respect the .ber format");
     }
     return (line);
 }
 
-char **check_map(char **maps, int len, int nbrl)
+char **check_map(t_all *all, char **maps, int len, int nbrl)
 {
     int i;
-    int c;
+    int cc[3];
 
     i = -1;
-    c = 0;
+    cc[0] = 0;
+    cc[1] = 0;
+    cc[2] = 0;
     while (maps[++i])
     {
         if (maps[i][0] != '1' || maps[i][len] != '1')
-            ft_free_texit((void **)maps, "Error1\nthe map does not respect the .ber format");
-        if (i && i != nbrl && !ft_strcmpstr(maps[i], "10PEC", &c))
-            ft_free_texit((void **)maps, "Error\nthe map has an invalid character");
+            ft_free_texit(all, (void **)maps, "Error1\nthe map does not respect the .ber format");
+        if (i && i != nbrl && !ft_strcmpstr(maps[i], "10PEC", cc))
+            ft_free_texit(all, (void **)maps, "Error\nthe map has an invalid character");
         if (!i && !ft_strcmpstr(maps[i], "1", NULL))
-            ft_free_texit((void **)maps, "Error\nthe first line from map must have only one");
+            ft_free_texit(all, (void **)maps, "Error\nthe first line from map must have only one");
         if (i == nbrl && !ft_strcmpstr(maps[i], "1", NULL))
-            ft_free_texit((void **)maps, "Error\nthe last line from map must have only one");
+            ft_free_texit(all, (void **)maps, "Error\nthe last line from map must have only one");
     }
-    if (c < 3)
-        ft_free_texit((void **)maps, "Error\nthe map must have at least one P, C and E");
+    if (cc[0] < 1 || cc[1] < 1 || cc[2] < 1)
+        ft_free_texit(all, (void **)maps, "Error\nthe map must have at least one P, C and E");
+    all->cmax = cc[0];
     return (maps);
 }
 
@@ -93,18 +96,20 @@ char **init_map(t_all *all, char *file, char **maps, char *map)
     i = 0;
     len = 0;
     fd = open_file(file);
-    line = get_next_line(fd, &len, map);
+    line = get_next_line(all, fd, &len, map);
     while (line)
     {
         map = ft_strjoin(map, line, len * ++i);
         ft_free_null(line);
-        line = get_next_line(fd, &len, map);
+        line = get_next_line(all, fd, &len, map);
     }
     if (i < 3)
-        ft_free_exit(map, "Error\nthe map should not be less than 3 lines long ");
+        ft_free_exit(all, map, "Error\nthe map should not be less than 3 lines long ");
     maps = ft_split(map, '\n');
     ft_free_null(map);
-    all->map->h = i - 1;
-    all->map->w = len - 2;
-    return (check_map(maps, len - 2, i - 1));
+    all->y = i;
+    all->x = len - 1;
+    all->ymax = ((i + 1) * WIDTH_TEXTURE) ;
+    all->xmax =  ((len - 1) * HEIGTH_TEXTURE);
+    return (check_map(all, maps, len - 2, i - 1));
 }

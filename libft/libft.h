@@ -6,7 +6,7 @@
 /*   By: engooh <erickngooh.1@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 23:57:30 by engooh            #+#    #+#             */
-/*   Updated: 2022/03/22 18:15:24 by lazarus          ###   ########.fr       */
+/*   Updated: 2022/03/30 01:45:12 by engooh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stddef.h>
 # include <unistd.h>
 # include <limits.h>
+# include "../so_long.h"
 
 typedef struct s_list
 {
@@ -41,6 +42,7 @@ void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 void    *ft_malloc(int size, int len);
+void    **ft_tabs_tabs(int t_size, int t_len, int s_size, int s_len);
 
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
@@ -54,7 +56,7 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int     ft_strcmpstr(char *s1, char *s2, int *c);
+int     ft_strcmpstr(char *s1, char *s2, int *cc);
 
 char	*ft_strdup(const char *s1);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
@@ -76,8 +78,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 int		ft_lstsize(t_list *lst);
 
-void    ft_free_exit(void *s, char *err);
 void    *ft_free_null(void *s);
 void    *ft_free_tabs(void **s);
-void    ft_free_texit(void **s, char *err);
 #endif

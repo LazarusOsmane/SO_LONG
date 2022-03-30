@@ -1,5 +1,28 @@
 #include "so_long.h"
 
+void    ft_free_texit(t_all *all, void **s, char *err)
+{
+    int i;
+
+    i = -1;
+    while (s && s[++i])
+        free(s[i]);
+    if (s)
+        free(s);
+    ft_putstr_fd(err, 0);
+    delete_struct(all);
+    exit(0);
+}
+
+void ft_free_exit(t_all *all, void *s, char *err)
+{
+    if (s)
+        free(s);
+    ft_putstr_fd(err, 0);
+    delete_struct(all);
+    exit(0);
+}
+
 t_all   *init_struct(void)
 {
     t_all   *all;
@@ -13,18 +36,8 @@ t_all   *init_struct(void)
     all->tmp = malloc(sizeof(t_data));
     if (!all->tmp)
         delete_struct(all);
-    all->map = malloc(sizeof(t_map));
-    if (!all->map)
-        delete_struct(all);
-    all->xpm = malloc(sizeof(t_xpm));
-    if (!all->xpm)
-        delete_struct(all);
-    all->elem = malloc(sizeof(t_elem));
-    if (!all->elem)
-        delete_struct(all);
-    all->player = malloc(sizeof(t_player));
-    if (!all->player)
-        delete_struct(all);
+    all->map = NULL;
+    all->mlx = NULL;
     return (all);
 }
 
@@ -35,16 +48,23 @@ void    delete_struct(t_all *all)
     if (all && all->tmp)
         free(all->tmp);
     if (all && all->map)
-        free(all->map);
-    if (all && all->map && all->map->map)
-        ft_free_tabs((void **)all->map->map);
-    if (all && all->xpm)
-        free(all->xpm);
-    if (all && all->elem)
-        free(all->elem);
-    if (all && all->player)
-        free(all->player);
+        ft_free_tabs((void **)all->map);
+    if (all->mlx)
+        free(all->mlx);
     if (all)
         free(all);
     exit(0);
+}
+
+void    delete_file_to_image(t_all *all)
+{
+    int i;
+
+    i = -1;
+    while (all->xpm[++i])
+    {
+        mlx_destroy_image(all->mlx, all->xpm[i]->img);
+        free(all->xpm[i]);
+    }
+    free(all->xpm);
 }
