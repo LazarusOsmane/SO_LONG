@@ -36,6 +36,7 @@ t_all   *init_struct(void)
     all->tmp = malloc(sizeof(t_data));
     if (!all->tmp)
         delete_struct(all);
+    all->cnt = 0;
     all->map = NULL;
     all->mlx = NULL;
     return (all);

@@ -6,7 +6,7 @@
 /*   By: lazarus <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 19:24:08 by lazarus           #+#    #+#             */
-/*   Updated: 2022/03/30 01:47:49 by engooh           ###   ########.fr       */
+/*   Updated: 2022/03/30 02:41:51 by engooh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,13 @@
 # include <fcntl.h>
 # include <errno.h>
 # include "libft/libft.h"
+# include "Printf/ft_printf.h"
 
 # ifdef __linux__
 #  define _POSIX_C_SOURCE 200809L
 #  define ESC 65307
 #  include "./minilibx-linux/mlx.h"
 #  include "/usr/include/X11/X.h"
-# endif
-# ifdef __APPLE__
-#  include "minilibx_opengl_20191021/mlx.h"
-# endif
-
 # define WIDTH_TEXTURE 64
 # define HEIGTH_TEXTURE 64
 # define ASSET_NBR 6
@@ -40,6 +36,12 @@
 # define LEFT 97
 # define RIGHT 100
 # define ESC 65307
+# endif
+
+# ifdef __APPLE__
+#  include "minilibx_opengl_20191021/mlx.h"
+# endif
+
 
 typedef struct s_xpm
 {
@@ -73,6 +75,7 @@ typedef struct s_all
 {
     int             x;
     int             y;
+    int             cnt;
     int             cmax;
     int             xmax;
     int             ymax;
