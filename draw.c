@@ -6,7 +6,7 @@
 /*   By: lazarus <lazarus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:42:32 by engooh            #+#    #+#             */
-/*   Updated: 2022/03/30 00:40:37 by engooh           ###   ########.fr       */
+/*   Updated: 2022/03/31 22:20:57 by engooh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -72,7 +72,10 @@ void    print_map(t_all *all, int x, int y)
         {
             all->flag = all->map[y][x] - '0';
             if (all->map[y][x] == '1')
-                draw(all, x, y, 32);
+            {
+                draw(all, x, y, 16);
+                draw(all, x, y, 28);
+            }
             if (all->map[y][x] == '0')
                 draw(all, x, y, 0);
             if (all->map[y][x] == '2' || all->map[y][x] == '3' || all->map[y][x] == '4')
