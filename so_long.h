@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lazarus <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: engooh <engooh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 19:24:08 by lazarus           #+#    #+#             */
-/*   Updated: 2022/03/30 02:41:51 by engooh           ###   ########.fr       */
+/*   Updated: 2022/04/01 17:37:39 by engooh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,43 +28,42 @@
 #  define ESC 65307
 #  include "./minilibx-linux/mlx.h"
 #  include "/usr/include/X11/X.h"
-# define WIDTH_TEXTURE 64
-# define HEIGTH_TEXTURE 64
-# define ASSET_NBR 6
-# define UP 119
-# define DOWN 115
-# define LEFT 97
-# define RIGHT 100
-# define ESC 65307
+#  define WIDTH_TEXTURE 64
+#  define HEIGTH_TEXTURE 64
+#  define ASSET_NBR 6
+#  define UP 119
+#  define DOWN 115
+#  define LEFT 97
+#  define RIGHT 100
+#  define ESC 65307
 # endif
 
 # ifdef __APPLE__
 #  include "minilibx_opengl_20191021/mlx.h"
 # endif
 
-
 typedef struct s_xpm
 {
 	int		x;
 	int		y;
-    int     col;
-    int     cnt;
-    int     pos[2];
+	int		col;
+	int		cnt;
+	int		pos[2];
 	void	*img;
 }	t_xpm;
 
 typedef struct s_elem
 {
-    int     x;
-    int     y;
-    int     color;
-    char    *flag;
-    t_xpm   *ground;
+	int		x;
+	int		y;
+	int		color;
+	char	*flag;
+	t_xpm	*ground;
 }	t_elem;
 
-typedef struct s_data 
+typedef struct s_data
 {
-    char	*addr;
+	char	*addr;
 	void	*img;
 	int		bpp;
 	int		llg;
@@ -73,40 +72,40 @@ typedef struct s_data
 
 typedef struct s_all
 {
-    int             x;
-    int             y;
-    int             cnt;
-    int             cmax;
-    int             xmax;
-    int             ymax;
-	void			*mlx;
-	void			*win;
-    int             flag;
-    char            **map;
-	t_data			*img;
-	t_data			*tmp;
-    t_xpm           **xpm;
-    int             color;
+	int			x;
+	int			y;
+	int			cnt;
+	int			cmax;
+	int			xmax;
+	int			ymax;
+	void		*mlx;
+	void		*win;
+	int			flag;
+	char		**map;
+	t_data	*img;
+	t_data	*tmp;
+	t_xpm		**xpm;
+	int			color;
 }	t_all;
 
-int     open_file(char *file);
-char    *get_next_line(t_all *all, int fd, int *size, char *map);
-char    **init_map(t_all *all, char *file, char **maps, char *map);
+int		open_file(char *file);
+char	*get_next_line(t_all *all, int fd, int *size, char *map);
+char	**init_map(t_all *all, char *file, char **maps, char *map);
 
-t_all   *init_struct(void);
-void    delete_struct(t_all *all);
-void    delete_file_to_image(t_all *all);
+t_all	*init_struct(void);
+void	delete_struct(t_all *all);
+void	delete_file_to_image(t_all *all);
 
-int     check_hook(int keycode, t_all *all);
+int		check_hook(int keycode, t_all *all);
 
-void    init_game(t_all *all);
-void    run_game(t_all *all);
-void    end_game(t_all *all);
+void	init_game(t_all *all);
+void	run_game(t_all *all);
+void	end_game(t_all *all);
 
-void    print_map(t_all *all, int x, int y);
+void	print_map(t_all *all, int x, int y);
 
-void    ft_free_texit(t_all *all, void **s, char *err);
-void    ft_free_exit(t_all *all, void *s, char *err);
-void    move(t_all *all, int key, int c);
-void    draw(t_all *all, int x, int y, int z);
+void	ft_free_texit(t_all *all, void **s, char *err);
+void	ft_free_exit(t_all *all, void *s, char *err);
+void	move(t_all *all, int key, int c);
+int		draw(t_all *all, int x, int y, int z);
 #endif

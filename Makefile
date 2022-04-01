@@ -6,13 +6,13 @@
 #    By: lazarus <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/20 19:26:01 by lazarus           #+#    #+#              #
-#    Updated: 2022/03/30 02:25:53 by engooh           ###   ########.fr        #
+#    Updated: 2022/04/01 18:01:09 by engooh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = main.c parse.c memoire.c hook.c games.c draw.c move.c
+SRC = main.c parse.c memoire.c games.c draw.c move.c
 OBJ = ${SRC:%.c=%.o}
-CFLAG = -g3 -Wall -Wextra -Werror
+CFLAG =  -Wall -Wextra -Werror
 UNAME := $(shell uname)
 all: so_long
 assan: so_long_assan 
@@ -30,6 +30,7 @@ so_long_assan: $(OBJ)
 	cd minilibx-linux && make && cd ..
 	gcc $(CFLAG) -c $^ -o $@
 endif
+
 ifeq ($(UNAME), Darwin)
 so_long: $(OBJ)
 	$(CC) $(CFLAG) $(OBJ) libft/libft.a minilibx_opengl_20191021/libmlx.a  Printf/libftprintf.a -o $@ -framework OpenGL -framework AppKit  -I./minilibx_opengl_20191021/ 
@@ -48,10 +49,8 @@ clean:
 fclean:
 	cd Printf/ && make fclean && cd ..
 	cd libft/ && make fclean && cd ..
-	rm *.o so_long so_long_assan 
+	rm *.o so_long
 
 re: fclean all
-	cd Printf/ && make re && cd ..
-	cd libft && make re && cd ..
 
 .PHONY: all fclean clean re

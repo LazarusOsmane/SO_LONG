@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_malloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: engooh <engooh@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/01 17:21:28 by engooh            #+#    #+#             */
+/*   Updated: 2022/04/01 17:22:05 by engooh           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-void    *ft_malloc(int size, int len)
+void	*ft_malloc(int size, int len)
 {
-    void    *p;
+	void	*p;
 
-    p = malloc(size * len);
-    if (!p)
-        return (NULL);
-    return (p);
+	p = malloc(size * len);
+	if (!p)
+		return (NULL);
+	return (p);
 }

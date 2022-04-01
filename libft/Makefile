@@ -17,7 +17,7 @@ CC  = gcc
 
 RM  = rm -f
 
-FLAG = -g3 -Wall -Werror -Wextra
+FLAG =  -Wall -Werror -Wextra
 
 all: ${NAME}
 
