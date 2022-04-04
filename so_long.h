@@ -6,7 +6,7 @@
 /*   By: engooh <engooh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 19:24:08 by lazarus           #+#    #+#             */
-/*   Updated: 2022/04/01 17:37:39 by engooh           ###   ########.fr       */
+/*   Updated: 2022/04/04 13:55:19 by engooh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ typedef struct s_all
 	void		*win;
 	int			flag;
 	char		**map;
-	t_data	*img;
-	t_data	*tmp;
+	t_data		*img;
+	t_data		*tmp;
 	t_xpm		**xpm;
 	int			color;
 }	t_all;
@@ -108,4 +108,5 @@ void	ft_free_texit(t_all *all, void **s, char *err);
 void	ft_free_exit(t_all *all, void *s, char *err);
 void	move(t_all *all, int key, int c);
 int		draw(t_all *all, int x, int y, int z);
+void	enemy(t_all *all);
 #endif

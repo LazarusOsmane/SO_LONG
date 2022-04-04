@@ -6,7 +6,7 @@
 /*   By: engooh <engooh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 22:06:59 by lazarus           #+#    #+#             */
-/*   Updated: 2022/04/01 18:25:06 by engooh           ###   ########.fr       */
+/*   Updated: 2022/04/04 13:55:02 by engooh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,9 @@ char	**init_map(t_all *all, char *file, char **maps, char *map)
 		ft_free_exit(all, map, "Error\n");
 	maps = ft_split(map, '\n');
 	ft_free_null(map);
-	all->y = i;
-	all->x = len - 1;
-	all->ymax = i * 32;
-	all->xmax = ((len - 2) * 64);
+	all->y = i * (64 / 2.4);
+	all->x = len * 64;
+	all->ymax = 1200;
+	all->xmax = 1400;
 	return (check_map(all, maps, len - 2, i - 1));
 }

@@ -6,7 +6,7 @@
 /*   By: engooh <engooh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:37:57 by engooh            #+#    #+#             */
-/*   Updated: 2022/04/01 15:39:03 by engooh           ###   ########.fr       */
+/*   Updated: 2022/04/04 10:42:56 by engooh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void	delete_file_to_image(t_all *all)
 	i = -1;
 	while (all->xpm[++i])
 	{
-		mlx_destroy_image(all->mlx, all->xpm[i]->img);
+		if (all->xpm[i]->img)
+			mlx_destroy_image(all->mlx, all->xpm[i]->img);
 		free(all->xpm[i]);
 	}
 	free(all->xpm);

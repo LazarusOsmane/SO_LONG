@@ -6,7 +6,7 @@
 /*   By: engooh <engooh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 18:26:55 by engooh            #+#    #+#             */
-/*   Updated: 2022/04/01 17:09:13 by engooh           ###   ########.fr       */
+/*   Updated: 2022/04/04 13:56:59 by engooh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	run_move(t_all *all, int px, int py, int c)
 		end_game(all);
 	else if (c == 2)
 		all->cmax--;
+	ft_printf("nbr move %d\n", ++all->cnt);
 	mlx_put_image_to_window(all->mlx, all->win, all->img->img, 0, 0);
-	ft_printf("nombre de mouvement: %d\n", ++all->cnt);
 }
 
 void	move(t_all *all, int key, int c)

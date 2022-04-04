@@ -6,7 +6,7 @@
 /*   By: engooh <engooh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 09:42:32 by engooh            #+#    #+#             */
-/*   Updated: 2022/04/01 17:52:38 by engooh           ###   ########.fr       */
+/*   Updated: 2022/04/04 13:47:08 by engooh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	draw(t_all *all, int x, int y, int z)
 
 	c = all->flag;
 	z = all->xpm[c]->y - z;
-	yy = 64 + (x + y) * (all->xpm[c]->y / 4);
+	yy = ((all->ymax / 2) - (all->y / 2)) + ((x + y) * (all->xpm[c]->y / 4));
 	xx = (all->xmax / 2) + (x - y) * (all->xpm[c]->x / 2.4);
 	put_pixel(all, all->xpm[c]->img, xx, yy + z);
 	return (1);
@@ -77,12 +77,12 @@ void	print_map(t_all *all, int x, int y)
 			if (all->map[y][x] == '0')
 				draw(all, x, y, 0);
 			if (all->map[y][x] == '2' || all->map[y][x] == '3'
-					|| all->map[y][x] == '4')
+					|| all->map[y][x] == '4' || all->map[y][x] == '5')
 			{
-				if (all->map[y][x] == '4')
+				if (all->map[y][x] == '4' || all->map[y][x] == '5')
 				{
-					all->xpm[4]->pos[0] = x;
-					all->xpm[4]->pos[1] = y;
+					all->xpm[all->flag]->pos[0] = x;
+					all->xpm[all->flag]->pos[1] = y;
 				}
 				all->flag = 0;
 				draw(all, x, y, 0);
