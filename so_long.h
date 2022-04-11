@@ -6,7 +6,7 @@
 /*   By: engooh <engooh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 19:24:08 by lazarus           #+#    #+#             */
-/*   Updated: 2022/04/04 13:55:19 by engooh           ###   ########.fr       */
+/*   Updated: 2022/04/11 12:06:40 by engooh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int		check_hook(int keycode, t_all *all);
 
 void	init_game(t_all *all);
 void	run_game(t_all *all);
-void	end_game(t_all *all);
+int		end_game(t_all *all);
 
 void	print_map(t_all *all, int x, int y);
 

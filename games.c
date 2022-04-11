@@ -6,7 +6,7 @@
 /*   By: engooh <engooh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 14:51:11 by engooh            #+#    #+#             */
-/*   Updated: 2022/04/04 13:56:42 by engooh           ###   ########.fr       */
+/*   Updated: 2022/04/11 12:06:21 by engooh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,17 @@ void	run_game(t_all *all)
 {
 	print_map(all, -1, -1);
 	mlx_hook(all->win, 2, 1L << 0, check_hook, all);
+	mlx_hook(all->win, 17, 1L << 0, end_game, all);
 	mlx_put_image_to_window(all->mlx, all->win, all->img->img, 0, 0);
 	mlx_loop(all->mlx);
 }
 
-void	end_game(t_all *all)
+int	end_game(t_all *all)
 {
 	delete_file_to_image(all);
 	mlx_destroy_image(all->mlx, all->img->img);
 	mlx_destroy_window(all->mlx, all->win);
 	mlx_destroy_display(all->mlx);
 	delete_struct(all);
+	return (0);
 }
