@@ -6,28 +6,33 @@
 /*   By: engooh <engooh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 22:06:59 by lazarus           #+#    #+#             */
-/*   Updated: 2022/04/04 13:55:02 by engooh           ###   ########.fr       */
+/*   Updated: 2022/04/13 14:22:42 by engooh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	open_file(char *file)
+int	open_file(t_all *all, char *file)
 {
-	int	i;
-	int	fd;
+	int     fd;
 
-	i = ft_strlen(file) - 4;
-	if (i <= 4 || ft_strncmp(".ber", file + i, 4))
-	{
-		ft_putstr_fd("Error\nthe map is not a .ber", 0);
-		exit(0);
-	}
+    if (!ft_strrnstr(file, ".ber"))
+    {
+        ft_printf("Error\nthis file has not .ber extention");
+        delete_struct(all);
+    }
+    fd = open(file, O_DIRECTORY);
+    if (fd > 0)
+    {
+        ft_printf("Error\n");
+        close(fd);
+        delete_struct(all);
+    }
 	fd = open(file, O_RDONLY | O_NOFOLLOW);
 	if (fd < 0)
 	{
 		perror("Error\n");
-		exit(0);
+        delete_struct(all);
 	}
 	return (fd);
 }
@@ -96,7 +101,7 @@ char	**init_map(t_all *all, char *file, char **maps, char *map)
 
 	i = 0;
 	len = 0;
-	fd = open_file(file);
+	fd = open_file(all, file);
 	line = get_next_line(all, fd, &len, map);
 	while (line)
 	{

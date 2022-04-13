@@ -6,7 +6,7 @@
 /*   By: engooh <engooh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 14:51:11 by engooh            #+#    #+#             */
-/*   Updated: 2022/04/11 12:06:21 by engooh           ###   ########.fr       */
+/*   Updated: 2022/04/13 14:04:05 by engooh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,13 @@ void	file_to_image_xpm(t_all *all)
 void	init_game(t_all *all)
 {
 	all->mlx = mlx_init();
-	all->win = mlx_new_window(all->mlx, all->xmax, all->ymax, "war block");
-	all->img->img = mlx_new_image(all->mlx, all->xmax, all->ymax);
-	all->img->addr = mlx_get_data_addr(all->img->img, &all->img->bpp,
+    if (!all->mlx)
+        end_game(all);
+    all->win = mlx_new_window(all->mlx, all->xmax, all->ymax, "war block");
+    all->img->img = mlx_new_image(all->mlx, all->xmax, all->ymax);
+    all->img->addr = mlx_get_data_addr(all->img->img, &all->img->bpp,
 			&all->img->llg, &all->img->edn);
-	file_to_image_xpm(all);
+    file_to_image_xpm(all);
 }
 
 void	run_game(t_all *all)
@@ -71,10 +73,15 @@ void	run_game(t_all *all)
 
 int	end_game(t_all *all)
 {
-	delete_file_to_image(all);
-	mlx_destroy_image(all->mlx, all->img->img);
-	mlx_destroy_window(all->mlx, all->win);
-	mlx_destroy_display(all->mlx);
-	delete_struct(all);
-	return (0);
+    if (all->img && all->img->img)
+        mlx_destroy_image(all->mlx, all->img->img);
+    if (all->win)
+        mlx_destroy_window(all->mlx, all->win);
+    if (all->xpm)
+        delete_file_to_image(all);
+    if (all->mlx)
+        mlx_destroy_display(all->mlx);
+    if (all)
+        delete_struct(all);
+    exit(0);
 }

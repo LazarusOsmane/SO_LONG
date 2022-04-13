@@ -6,7 +6,7 @@
 /*   By: engooh <engooh@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 19:24:08 by lazarus           #+#    #+#             */
-/*   Updated: 2022/04/11 12:06:40 by engooh           ###   ########.fr       */
+/*   Updated: 2022/04/13 14:01:03 by engooh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct s_all
 	int			color;
 }	t_all;
 
-int		open_file(char *file);
+int		open_file(t_all *all, char *file);
 char	*get_next_line(t_all *all, int fd, int *size, char *map);
 char	**init_map(t_all *all, char *file, char **maps, char *map);
 
